@@ -71,6 +71,7 @@ public class AdminGoodsControllerImpl extends BaseController  implements AdminGo
 		List<GoodsVO> newGoodsList=adminGoodsService.listNewGoods(condMap);
 		mav.addObject("newGoodsList", newGoodsList);
 		//
+ 		//
 		
 		String beginDate1[]=beginDate.split("-");
 		String endDate2[]=endDate.split("-");
