@@ -72,7 +72,8 @@ public class AdminGoodsControllerImpl extends BaseController  implements AdminGo
 		mav.addObject("newGoodsList", newGoodsList);
 		//
  		//
-		
+ 		//
+
 		String beginDate1[]=beginDate.split("-");
 		String endDate2[]=endDate.split("-");
 		mav.addObject("beginYear",beginDate1[0]);
