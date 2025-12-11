@@ -18,11 +18,18 @@ import com.bookshop01.common.base.BaseController;
 import com.bookshop01.goods.service.GoodsService;
 import com.bookshop01.goods.vo.GoodsVO;
 
+
 @Controller("mainController")
 @EnableAspectJAutoProxy
 public class MainController extends BaseController {
 	@Autowired
 	private GoodsService goodsService;
+
+	// bookShop/ → main.do redirect
+	@RequestMapping(value = "/", method = RequestMethod.GET)
+	public String homeRedirect() {
+		return "redirect:/main/main.do";
+	}
 
 	@RequestMapping(value= "/main/main.do" ,method={RequestMethod.POST,RequestMethod.GET})
 	public ModelAndView main(HttpServletRequest request, HttpServletResponse response) throws Exception{
@@ -30,7 +37,7 @@ public class MainController extends BaseController {
 		ModelAndView mav=new ModelAndView();
 		String viewName=(String)request.getAttribute("viewName");
 		mav.setViewName(viewName);
-		
+
 		session=request.getSession();
 		session.setAttribute("side_menu", "user");
 		Map<String,List<GoodsVO>> goodsMap=goodsService.listGoods();

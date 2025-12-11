@@ -51,6 +51,7 @@
 			<li><a href="${contextPath}/test/threadSleep2sec.do">Thread Sleep 2sec</a></li>
 			<li><a href="${contextPath}/test/threadSleep3sec.do">Thread Sleep 3sec</a></li>
 			<li><a href="${contextPath}/test/threadSleep4sec.do">Thread Sleep 4sec</a></li>
+			<li><a href="${contextPath}/test/cursorLeak/leakConnection.do">ResultSet Not Closed (DBCP Leak Test)</a></li>
 
 		</ul>
 	</li>
