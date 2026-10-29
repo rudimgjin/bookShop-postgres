@@ -33,7 +33,7 @@ public class CartControllerImpl extends BaseController implements CartController
 	private CartVO cartVO;
 	@Autowired
 	private MemberVO memberVO;
-	
+
 	@RequestMapping(value="/myCartList.do" ,method = RequestMethod.GET)
 	public ModelAndView myCartMain(HttpServletRequest request, HttpServletResponse response)  throws Exception {
 		String viewName=(String)request.getAttribute("viewName");
@@ -43,7 +43,7 @@ public class CartControllerImpl extends BaseController implements CartController
 		String member_id=memberVO.getMember_id();
 		cartVO.setMember_id(member_id);
 		Map<String ,List> cartMap=cartService.myCartList(cartVO);
-		session.setAttribute("cartMap", cartMap);//장바구니 목록 화면에서 상품 주문 시 사용하기 위해서 장바구니 목록을 세션에 저장한다.
+		session.setAttribute("cartMap", cartMap);
 		//mav.addObject("cartMap", cartMap);
 		return mav;
 	}
@@ -53,9 +53,8 @@ public class CartControllerImpl extends BaseController implements CartController
 		HttpSession session=request.getSession();
 		memberVO=(MemberVO)session.getAttribute("memberInfo");
 		String member_id=memberVO.getMember_id();
-		
+
 		cartVO.setMember_id(member_id);
-		//카트 등록전에 이미 등록된 제품인지 판별한다.
 		cartVO.setGoods_id(goods_id);
 		cartVO.setMember_id(member_id);
 		boolean isAreadyExisted=cartService.findCartGoods(cartVO);
@@ -67,7 +66,7 @@ public class CartControllerImpl extends BaseController implements CartController
 			return "add_success";
 		}
 	}
-	
+
 	@RequestMapping(value="/modifyCartQty.do" ,method = RequestMethod.POST)
 	public @ResponseBody String  modifyCartQty(@RequestParam("goods_id") int goods_id,
 			                                   @RequestParam("cart_goods_qty") int cart_goods_qty,
@@ -79,15 +78,15 @@ public class CartControllerImpl extends BaseController implements CartController
 		cartVO.setMember_id(member_id);
 		cartVO.setCart_goods_qty(cart_goods_qty);
 		boolean result=cartService.modifyCartQty(cartVO);
-		
+
 		if(result==true){
 		   return "modify_success";
 		}else{
-			  return "modify_failed";	
+			  return "modify_failed";
 		}
-		
+
 	}
-	
+
 	@RequestMapping(value="/removeCartGoods.do" ,method = RequestMethod.POST)
 	public ModelAndView removeCartGoods(@RequestParam("cart_id") int cart_id,
 			                          HttpServletRequest request, HttpServletResponse response)  throws Exception{
